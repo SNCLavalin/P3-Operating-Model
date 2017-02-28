@@ -183,7 +183,7 @@ function update(source) {
     links = tree.links(nodes);
 　
   // //Spacing for each node. Normalize for fixed-depth.
-  nodes.forEach(function(d) { d.y = d.depth * 400; });
+  nodes.forEach(function(d) { d.y = d.depth * 200; });
 　
   //Declare node variable, so that each node has its own unique ID
   var node = svgGroup.selectAll("g.node")
