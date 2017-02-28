@@ -1,6 +1,15 @@
 // ************** Generate the tree diagram   *****************
 　
 　
+//Calculate total nodes, max label length
+var totalNodes = 0;
+var maxLabelLength = 0;
+　
+//Panning variables
+var panSpeed = 200;
+var panBoundary = 20; // Within 20px from edges will pan when dragging
+　
+　
 //Padding for Network
 var 	margin = {top: 20, right: 120, bottom: 20, left: 120},
   	width = 2500 - margin.right - margin.left,
@@ -13,28 +22,22 @@ var 	i = 0,
 //Root of the tree
 var	root;
 　
+//size of the diagram
+var viewerWidth = $(document).width();
+var viewerHeight = $(document).height();
+　
 //Tree layout. Assigns and calculates the data required for the nodes and links for the tree
-var tree = d3.layout.tree().size([height, width]);
+var tree = d3.layout.tree().size([viewerHeight, viewerWidth]);
 　
 　
-//Declares variable that will draw the lines between nodes
+//Declares variable that will draw the lines between nodes (define a d3 diagonal projection for use by the node paths later on.)
 //Swap d.x and d.y to make tree horizontal [1/2]
 var diagonal = d3.svg.diagonal().projection(function(d) { return [d.y, d.x]; });
 　
 　
-//Appends SVG working area to the div with the class ".chart", gives height and width,
-//Moves the SVG canvas with the margins set earlier
-//Creates group elements "g" which contains all the objects (nodes/links/text etc)
-var svg = d3.select("#chart").append("svg")
-  .attr("width", width + margin.right + margin.left)
-  .attr("height", height + margin.top + margin.bottom)
-  .attr("class", "overlay")
-  .append("g")
-  .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-　
 　
 // load the external data
-d3.csv("treeData.csv", function(error, data) {
+d3.csv("http://csb.snclavalin.com/sites/Project_Services/sh/doc/Project%20Services%20ADMIN%20-%20N.%20Roy/Workflow%20Animation%20Test/data/treeData.csv", function(error, data) {
 　
   if (error) throw error;
 　
@@ -84,6 +87,93 @@ d3.csv("treeData.csv", function(error, data) {
 d3.select(self.frameElement).style("height", "800px");
 　
 　
+//A recursive helper function for performing some setup by walking through all nodes
+　
+function visit(parent, visitFn, childrenFn) {
+	if (!parent) return;
+　
+	visitFn(parent);
+　
+	var children = childrenFn(parent);
+	if (children) {
+		var count = children.length;
+		for (var i = 0; i < count; i++) {
+			visit(children[i], visitFn, childrenFn);
+		}
+　
+	}
+　
+}
+　
+　
+// Call visit function to establish maxLabelLength
+    visit(root, function(d) {
+        totalNodes++;
+        maxLabelLength = Math.max(d.name.length, maxLabelLength);
+　
+    }, function(d) {
+        return d.children && d.children.length > 0 ? d.children : null;
+    });
+　
+　
+// Pan function
+　
+    function pan(domNode, direction) {
+        var speed = panSpeed;
+        if (panTimer) {
+            clearTimeout(panTimer);
+            translateCoords = d3.transform(svgGroup.attr("transform"));
+            if (direction == 'left' || direction == 'right') {
+                translateX = direction == 'left' ? translateCoords.translate[0] + speed : translateCoords.translate[0] - speed;
+                translateY = translateCoords.translate[1];
+            } else if (direction == 'up' || direction == 'down') {
+                translateX = translateCoords.translate[0];
+                translateY = direction == 'up' ? translateCoords.translate[1] + speed : translateCoords.translate[1] - speed;
+            }
+            scaleX = translateCoords.scale[0];
+            scaleY = translateCoords.scale[1];
+            scale = zoomListener.scale();
+            svgGroup.transition().attr("transform", "translate(" + translateX + "," + translateY + ")scale(" + scale + ")");
+            d3.select(domNode).select('g.node').attr("transform", "translate(" + translateX + "," + translateY + ")");
+            zoomListener.scale(zoomListener.scale());
+            zoomListener.translate([translateX, translateY]);
+            panTimer = setTimeout(function() {
+                pan(domNode, speed, direction);
+            }, 50);
+        }
+    }
+　
+// Define the zoom function for the zoomable tree
+　
+    function zoom() {
+        svgGroup.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+    }
+　
+// define the zoomListener which calls the zoom function on the "zoom" event constrained within the scaleExtents
+    var zoomListener = d3.behavior.zoom().scaleExtent([0.1, 3]).on("zoom", zoom);
+　
+//Define the baseSvg, attaching a class for styling and the zoomListener
+//Appends SVG working area to the div with the class ".chart", gives height and width,
+var baseSvg = d3.select("#chart").append("svg")
+  .attr("width", viewerWidth)
+  .attr("height", viewerHeight)
+  .attr("class", "overlay")
+  .call(zoomListener);
+  
+　
+//Moves the SVG canvas with the margins set earlier
+//Creates group elements "g" which contains all the objects (nodes/links/text etc)
+var svgGroup = baseSvg.append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+　
+　
+centerNode(root);
+　
+　
+　
+　
+　
+　
 function update(source) {
 　
   //Runs the tree layout, returning the array of nodes associated with the specified root node
@@ -96,7 +186,7 @@ function update(source) {
   nodes.forEach(function(d) { d.y = d.depth * 400; });
 　
   //Declare node variable, so that each node has its own unique ID
-  var node = svg.selectAll("g.node")
+  var node = svgGroup.selectAll("g.node")
     .data(nodes, function(d) { return d.id || (d.id = ++i); });
 　
 　
@@ -110,9 +200,11 @@ function update(source) {
       // add tool tip 
       .on("mouseover", function(d) {
 	div.transition()
-	  .duration(200)
+	  .duration(500)
 	  .style("opacity", .9);
         div.html(
+            //"Index: ".bold() + d.name + "<br/>" +  "<br/>" +
+            //"Name: ".bold() + d.LABEL + "<br/>" +  "<br/>" +
             "Description: ".bold() + "<br/>" + d.DESCRIPTION + "<br/>" + "<br/>" +
             "Lead: ".bold() + d.LEAD + "<br/>" + "<br/>" +
 	    "Participants: ".bold() + "<br/>" + d.PARTICIPANTS.split(";").join("<br/>")
@@ -161,6 +253,19 @@ function update(source) {
           	.style("fill", "lightsteelblue")
           	.style("fill-opacity", 0.3)        // set to 1e-6 to hide  
 		;
+　
+  // Associate icon to node
+  /*nodeEnter.append("image")
+      .attr("xlink:href", function(d) { return d.ICON; })
+      .attr("x", "-12px")
+      .attr("y", "-12px")
+      .attr("width", "24px")
+      .attr("cursor", "pointer")
+      .attr("height", "24px");*/
+　
+　
+　
+　
   //add the tool tip
   var div = d3.select("body")
     .append("div")
@@ -186,7 +291,8 @@ function update(source) {
   // Transition exiting nodes to the parent's new position.
   var nodeExit = node.exit().transition()
     .duration(duration)
-    .attr("transform", function(d) { return "translate(" + source.y + "," + source.x + ")"; })
+    .attr("transform", function(d) { return "translate(" + source.y + 
+                                             "," + source.x + ")"; })
     .remove();
 　
   nodeExit.select("circle")
@@ -196,7 +302,7 @@ function update(source) {
     .style("fill-opacity", 1e-6);
 　
   // //Draws links(edges) to nodes
-  var link = svg.selectAll("path.link")
+  var link = svgGroup.selectAll("path.link")
     .data(links, function(d) { return d.target.id; });
 　
   // Enter any new links at the parent's previous position.
@@ -229,6 +335,23 @@ function update(source) {
   });
 }
 　
+// Function to center node when clicked/dropped so node doesn't get lost when collapsing/moving with large amount of data
+　
+  function centerNode(source) {
+        scale = zoomListener.scale();
+        x = -source.y0;
+        y = -source.x0;
+        x = x * scale + viewerWidth / 2;
+        y = y * scale + viewerHeight / 2;
+        d3.select('g').transition()
+            .duration(duration)
+            .attr("transform", "translate(" + x + "," + y + ")scale(" + scale + ")");
+        zoomListener.scale(scale);
+        zoomListener.translate([x, y]);
+    }
+　
+　
+　
 // Toggle children on click.
 function click(d) {
   if (d.children) {
@@ -252,8 +375,12 @@ if(d.parent){
 			
     }
    });
-　
+   centerNode(d);
 }
+　
+　
+　
+　
   update(d);
 }
 　
