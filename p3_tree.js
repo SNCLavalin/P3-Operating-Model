@@ -37,7 +37,7 @@ var diagonal = d3.svg.diagonal().projection(function(d) { return [d.y, d.x]; });
 　
 　
 // load the external data
-d3.csv("http://csb.snclavalin.com/sites/Project_Services/sh/doc/Project%20Services%20ADMIN%20-%20N.%20Roy/Workflow%20Animation%20Test/data/treeData.csv", function(error, data) {
+d3.csv("treeData.csv", function(error, data) {
 　
   if (error) throw error;
 　
