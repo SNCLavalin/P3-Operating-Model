@@ -113,8 +113,6 @@ function update(source) {
 	  .duration(200)
 	  .style("opacity", .9);
         div.html(
-            //"Index: ".bold() + d.name + "<br/>" +  "<br/>" +
-            //"Name: ".bold() + d.LABEL + "<br/>" +  "<br/>" +
             "Description: ".bold() + "<br/>" + d.DESCRIPTION + "<br/>" + "<br/>" +
             "Lead: ".bold() + d.LEAD + "<br/>" + "<br/>" +
 	    "Participants: ".bold() + "<br/>" + d.PARTICIPANTS.split(";").join("<br/>")
@@ -123,7 +121,6 @@ function update(source) {
           .style("top", (d3.event.pageY - 28) + "px");
         })
       .on("mouseout", function(d) {
-	 //return div.style("visibility", "hidden");
         div.transition()
           .duration(duration)
           .style("opacity", 0);
@@ -164,16 +161,6 @@ function update(source) {
           	.style("fill", "lightsteelblue")
           	.style("fill-opacity", 0.3)        // set to 1e-6 to hide  
 		;
-　
-  // Associate icon to node
-  /*nodeEnter.append("image")
-      .attr("xlink:href", function(d) { return d.ICON; })
-      .attr("x", "-12px")
-      .attr("y", "-12px")
-      .attr("width", "24px")
-      .attr("cursor", "pointer")
-      .attr("height", "24px");*/
-　
   //add the tool tip
   var div = d3.select("body")
     .append("div")
