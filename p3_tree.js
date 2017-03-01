@@ -82,7 +82,6 @@ d3.csv("treeData.csv", function(error, data) {
   //collapse(root);
   
   update(root);
-  //centerNode(root);
 });
 　
 d3.select(self.frameElement).style("height", "800px");
@@ -253,7 +252,19 @@ function update(source) {
           	.attr("height", function (d) { return d.HEIGHT; })
           	.style("fill", "lightsteelblue")
           	.style("fill-opacity", 0.3)        // set to 1e-6 to hide  
-		;　
+		;
+　
+  // Associate icon to node
+  /*nodeEnter.append("image")
+      .attr("xlink:href", function(d) { return d.ICON; })
+      .attr("x", "-12px")
+      .attr("y", "-12px")
+      .attr("width", "24px")
+      .attr("cursor", "pointer")
+      .attr("height", "24px");*/
+　
+　
+　
 　
   //add the tool tip
   var div = d3.select("body")

@@ -13,7 +13,15 @@
     </head>
     
     <style type="text/css">
-	    
+　
+	    html, body {
+		   font: 14px helvetica neue, helvetica, arial, sans-serif;
+		   width: 100%;
+		   height: 100%;
+		   margin: 0;
+		   padding: 0;
+	    }
+　
 	    .overlay {
 	    	 background-color:#EEE;
 	    }
@@ -40,21 +48,22 @@
 	    	 cursor: pointer;
 		 fill: #fff;
 		 stroke: steelblue;
-		 stroke-width: 1.5px;	
+		 stroke-width: 3px;	
 	    }
 	    
 	    .node text {
-	    	 font-size: 10px;
-	    	 font-family: sans-serif;
+	    	 font: 12px sans-serif;
 	    }
 	    
     </style>
 	
-　  	
+　
+	
     <body>
 	    <h1>P3 Operating Model - Process Tree</h1>
-	    <script src="p3_tree.js"></script>	
-            <div id="chart"></div>
+	    <div id="chart"></div>
+	    <script src="p3_tree.js"></script>
+	    
     </body>
 	
 </html>
