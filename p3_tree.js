@@ -365,11 +365,11 @@ if(d.parent){
 			
     }
    });
-   centerNode(d);
+   
 }
 　
 　
-　
+　centerNode(d);
 　
   update(d);
 }
