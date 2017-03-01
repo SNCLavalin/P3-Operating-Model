@@ -346,7 +346,6 @@ function update(source) {
 function click(d) {
   if (d.children) {
     d._children = d.children;
-    d.children.forEach(collapse);
     d.children = null;
   } else {
     d.children = d._children;
