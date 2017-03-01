@@ -82,6 +82,7 @@ d3.csv("treeData.csv", function(error, data) {
   collapse(root);
   
   update(root);
+  centerNode(root);
 });
 　
 //d3.select(self.frameElement).style("height", "800px");
