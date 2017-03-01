@@ -66,7 +66,7 @@ d3.csv("treeData.csv", function(error, data) {
 　
   root = treeData[0];
   root.x0 = height / 2;
-  root.y0 = 0;
+  root.y0 = width / 2;
 	
   //collapse all the nodes by default when page is opened
   function collapse(d) {
