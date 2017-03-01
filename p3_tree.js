@@ -168,7 +168,7 @@ var svgGroup = baseSvg.append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 　
 　
-//centerNode(root);
+centerNode(root);
 　
 　
 　
