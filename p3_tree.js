@@ -366,8 +366,6 @@ if(d.parent){
     }
    });
    
-} else {
-	 root.children.forEach(collapse);
 }
 　
 　
