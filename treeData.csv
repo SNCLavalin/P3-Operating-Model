@@ -384,8 +384,6 @@ name,parent,LABEL,DESCRIPTION,LEAD,PARTICIPANTS,LINE,TYPE,ICON,LINK,WIDTH,HEIGHT
 3.1.09.02.00.00.00.00,3.1.09.00.00.00.00.00,Present Recommended PM Systems to Partners,Description,9-Project Management Systems; ,9-Project Management Systems; ,lightgreen,Meeting,,javascript:void(0),305,15,none,42,15,-319
 3.1.09.03.00.00.00.00,3.1.09.00.00.00.00.00,"""Document Analysis - Read, Review & Understand""",Description,6-Pre-Construction / Bid Team; ,"2-Capital / Equity; 4-Commercial; 5-Legal; 7-Estimation; 8-Project Controls; 10-Document Control; 11-Procurement; 12-Risk Management; 13-Quality; 14-Human Ressources; 15-(HSSE) Health, Safety, Security Environment; 16-Engineering; 17-Construction & Project Management; 18-Operations & Maintenance; ",lightgreen,Document Preparation,,javascript:void(0),342,15,none,47,15,-357
 3.1.09.04.00.00.00.00,3.1.09.00.00.00.00.00,Select Systems Required to Manage Project,Description,9-Project Management Systems; ,9-Project Management Systems; ,lightgreen,Header,,javascript:void(0),298,15,none,41,15,-312
-,,,,,,,,,,,,new,0,,
-,,,,,,,,,,,,new,0,,
 3.1.09.05.00.00.00.00,3.1.09.00.00.00.00.00,Bid Approved for Submission,Bid approved for submission in accordance with LOA 1009 & SOP 2221,N/A;,All;,lightgreen,Milestone,,javascript:void(0),196,15,none,27,15,-208
 3.1.09.05.01.00.00.00,3.1.09.05.00.00.00.00,LOA Policy 1009,Description,N/A;,All;,lightgreen,Document Preparation,,http://infozone.snclavalin.com/en/files/1009-levels-of-authority-en.pdf,109,15,new,15,15,-118
 3.1.09.05.02.00.00.00,3.1.09.05.00.00.00.00,SOP 2221,Description,N/A;,All;,lightgreen,Document Preparation,,http://infozone.snclavalin.com/en/files/2221-project-investment-approval-en.pdf,58,15,new,8,15,-66
