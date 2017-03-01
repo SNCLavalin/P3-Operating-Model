@@ -252,7 +252,7 @@ function update(source) {
           	.attr("width", function (d) { return d.LABEL.length*7.3; }) 
           	.attr("height", function (d) { return d.HEIGHT; })
           	.style("fill", "lightsteelblue")
-          	.style("fill-opacity", 0.3)        // set to 1e-6 to hide  
+          	.style("fill-opacity", 1e-6)        // set to 1e-6 to hide  
 		;
 　
 　
