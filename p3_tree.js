@@ -332,7 +332,7 @@ function update(source) {
         x = -source.y0;
         y = -source.x0;
         x = x * scale + viewerWidth / 3.1;
-        y = y * scale + viewerHeight / 3.1;
+        y = y * scale + viewerHeight / 2;
         d3.select('g').transition()
             .duration(duration)
             .attr("transform", "translate(" + x + "," + y + ")scale(" + scale + ")");
