@@ -331,8 +331,8 @@ function update(source) {
         scale = zoomListener.scale();
         x = -source.y0;
         y = -source.x0;
-        x = x * scale + viewerWidth / 2;
-        y = y * scale + viewerHeight / 2;
+        x = x * scale + viewerWidth / 2.5;
+        y = y * scale + viewerHeight / 2.5;
         d3.select('g').transition()
             .duration(duration)
             .attr("transform", "translate(" + x + "," + y + ")scale(" + scale + ")");
