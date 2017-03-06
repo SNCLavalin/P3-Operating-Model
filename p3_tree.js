@@ -79,7 +79,7 @@ d3.csv("treeData.csv", function(error, data) {
 　
 　
   root.children.forEach(collapse);
-  collapse(root);
+  //collapse(root);
   
   update(root);
   centerNode(root);
