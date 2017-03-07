@@ -208,8 +208,8 @@ function update(source) {
             //"Name: ".bold() + d.LABEL + "<br/>" +  "<br/>" +
             "Description: ".bold() + "<br/>" + d.DESCRIPTION + "<br/>" + "<br/>" +
             "Lead: ".bold() + d.LEAD + "<br/>" + "<br/>" +
-	    "Participants: ".bold() + "<br/>" + d.PARTICIPANTS.split(";").join("<br/>") + "<br/>" +
-  		  '<a href = "http://google.com"> TEST LINK '
+	    "Participants: ".bold() + "<br/>" + d.PARTICIPANTS.split(";").join("<br/>") + "<br/>" + "<br/>"
+  	    '<a href = "http://google.com"> Link to Document '
             )
           .style("left", (d3.event.pageX) + "px")
           .style("top", (d3.event.pageY - 28) + "px");
