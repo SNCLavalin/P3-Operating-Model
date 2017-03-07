@@ -216,7 +216,7 @@ function update(source) {
         })
       .on("mouseout", function(d) {
         div.transition()
-          .duration(duration)
+          .duration(3000)
           .style("opacity", 0);
         });
 　
