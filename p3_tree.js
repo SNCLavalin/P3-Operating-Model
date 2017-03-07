@@ -241,22 +241,7 @@ function update(source) {
     //Text styling
     .style("fill-opacity", 1e-6);
 　
-   //Associate rectangular label to node
-    nodeEnter
-	.append("a")
-          	.attr("xlink:href", function (d) { return d.LINK; })
-		.attr("xlink:show", function (d) { return d.LINK_TYPE; })
-     	.append("rect")
-          	.attr("class", "clickable")
-          	.attr("y", -15)
-          	.attr("x", function (d) { return d.children || d._children ? d.POSITION1 : d.POSITION2; })
-          	.attr("width", function (d) { return d.LABEL.length*7.3; }) 
-          	.attr("height", function (d) { return d.HEIGHT; })
-          	.style("fill", "lightsteelblue")
-          	.style("fill-opacity", 1e-6)        // set to 1e-6 to hide  
-		;
-　
-　
+   
   //add the tool tip
   var div = d3.select("body")
     .append("div")
