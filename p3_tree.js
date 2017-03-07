@@ -201,7 +201,7 @@ function update(source) {
       // add tool tip 
       .on("mouseover", function(d) {
 	div.transition()
-	  .duration(500)
+	  .duration(duration)
 	  .style("opacity", .9);
         div.html(
             //"Index: ".bold() + d.name + "<br/>" +  "<br/>" +
