@@ -10,56 +10,100 @@
 	
 	<!-- load the jquery library --> 
 	<script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
-	    
-	<!-- load the tooltip library --> 
+	
+	<!-- load the tooltip library -->
 	<script src="http://cdn.jsdelivr.net/qtip2/3.0.3/jquery.qtip.min.js"></script>
+	
+	
     </head>
     
     <style type="text/css">
+　
+	    	html, body {
+		   	font: 14px helvetica neue, helvetica, arial, sans-serif;
+		   	width: 100%;
+		   	height: 100%;
+		   	margin: 0;
+		   	padding: 0;
+	    	}
+　
+	    	.overlay {
+	    	 	background-color:#EEE;
+	    	}
 	    
-	    .node {
-	    	 cursor: pointer;
-	    }
+	    	.link {
+	    	 	fill:none;
+		 	stroke: #ccc;
+		 	stroke-width: 1.5px;
+	    	}  
 	    
-	    .overlay {
-	    	 background-color:#EEE;
-	    }
+	    	div.tooltip {
+	    	 	position: absolute;
+		 	text-align: left;
+		 	width: 180px;
+		 	padding: 2px;
+		 	font: 12px sans-serif;
+		 	background: lightsteelblue;
+		 	border: 1px;
+		 	border-radius: 8px;
+		 	pointer-events: none;
+	    	}
 	    
-	    .link {
-	    	 fill:none;
-		 stroke: #ccc;
-		 stroke-width: 1.5px;
-	    }  
+	    	.node circle {
+	    	 	cursor: pointer;
+		 	fill: #fff;
+		 	stroke: steelblue;
+		 	stroke-width: 3px;	
+	    	}
 	    
-	    div.tooltip {
-	    	 position: absolute;
-		 text-align: left;
-		 width: 180px;
-		 padding: 2px;
-		 font: 12px sans-serif;
-		 background: lightsteelblue;
-		 border: 1px;
-		 border-radius: 8px;
-	
-	    }
-	    
-	    .node circle {	    
-		 fill: #fff;
-		 stroke: steelblue;
-		 stroke-width: 3px;	
-	    }
-	    
-	    .node text {
-	    	 font: 12px sans-serif;
-	    }
+	    	.node text {
+	    	 	font: 12px sans-serif;
+	   	}
+　
+		.d3-tip {
+    			line-height: 1;
+    			font-weight: bold;
+    			padding: 12px;
+    			background-color: #EEA199;
+    			color: #fff;
+    			border: solid 2px #7B241C;
+    			border-radius: 2px;
+		}
+　
+		.d3-tip a:link {
+    			color: #2E2B2B;
+		}
+　
+		/* Creates a small triangle extender for the tooltip */
+		.d3-tip:after {
+    			box-sizing: border-box;
+    			display: inline;
+    			font-size: 10px;
+    			width: 100%;
+    			line-height: 1;
+    			color: #EEA199;
+    			content: "\25BC";
+    			position: absolute;
+    			text-align: center;
+		}
+　
+		/* Style northward tooltips differently */
+		.d3-tip.n:after {
+    			margin: -1px 0 0 0;
+    			top: 100%;
+    			left: 0;
+		}		
 	    
     </style>
 	
 　
 	
     <body>
+	    <h1>P3 Operating Model - Process Tree</h1>
 	    <div id="chart"></div>
-	    <script src="p3_tree.js"></script>
+	    
+	    <!-- load the tree -->
+	    <script src="../js/p3_tree.js"></script>
 	    
     </body>
 	
