@@ -165,7 +165,7 @@ var baseSvg = d3.select("#chart").append("svg")
 //Moves the SVG canvas with the margins set earlier
 //Creates group elements "g" which contains all the objects (nodes/links/text etc)
 var svgGroup = baseSvg.append("g");
-    //.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 　
 　
 centerNode(root);
