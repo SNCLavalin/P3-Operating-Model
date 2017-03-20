@@ -17,7 +17,7 @@ var 	margin = {top: 20, right: 120, bottom: 20, left: 120},
 　
 //Timer for duration
 var 	i = 0,
-  	duration = 500;
+  	duration = 750;
 　
 //Root of the tree
 var	root;
