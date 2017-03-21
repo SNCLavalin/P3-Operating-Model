@@ -241,7 +241,11 @@ function update(source) {
     //Text styling
     .style("fill-opacity", 1e-6);
 　
-   
+    //add the tooltip
+   var div = d3.select("body")
+       .append("div")
+       .attr("class", "tooltîp") // apply the "tooltip" class
+       .style("opacity",0) // set to invisible
     
 　
   // Transition nodes to their new position.
