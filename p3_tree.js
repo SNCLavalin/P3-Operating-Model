@@ -245,7 +245,7 @@ function update(source) {
    var div = d3.select("body")
        .append("div")
        .attr("class", "tooltîp") // apply the "tooltip" class
-       .style("opacity",0) // set to invisible
+       .style("opacity",0); // set to invisible
     
 　
   // Transition nodes to their new position.
