@@ -85,7 +85,7 @@ d3.csv("treeData.csv", function(error, data) {
   centerNode(root);
 });
 　
-//d3.select(self.frameElement).style("height", "800px");
+d3.select(self.frameElement).style("height", "800px");
 　
 　
 //A recursive helper function for performing some setup by walking through all nodes
@@ -168,9 +168,6 @@ var svgGroup = baseSvg.append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 　
 　
-centerNode(root);
-　
-　
 　
 　
 　
@@ -209,14 +206,14 @@ function update(source) {
             "Description: ".bold() + "<br/>" + d.DESCRIPTION + "<br/>" + "<br/>" +
             "Lead: ".bold() + d.LEAD + "<br/>" + "<br/>" +
 	    "Participants: ".bold() + "<br/>" + d.PARTICIPANTS.split(";").join("<br/>") + "<br/>" + "<br/>" +
-  	    '<a href = "http://google.com"> Link to Document '
+  	    //'<a href = "http://google.com"> Link to Document '
             )
           .style("left", (d3.event.pageX) + "px")
           .style("top", (d3.event.pageY - 28) + "px");
         })
       .on("mouseout", function(d) {
         div.transition()
-          .duration(3000)
+          .duration(500)
           .style("opacity", 0);
         });
 　
@@ -244,7 +241,7 @@ function update(source) {
     //add the tooltip
    var div = d3.select("body")
        .append("div")
-       .attr("class", "tooltîp") // apply the "tooltip" class
+       .attr("class", "tooltip") // apply the "tooltip" class
        .style("opacity",0); // set to invisible
     
 　
