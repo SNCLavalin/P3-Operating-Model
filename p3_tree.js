@@ -85,7 +85,7 @@ d3.csv("treeData.csv", function(error, data) {
   centerNode(root);
 });
 　
-d3.select(self.frameElement).style("height", "800px");
+
 　
 　
 //A recursive helper function for performing some setup by walking through all nodes
