@@ -213,7 +213,7 @@ function update(source) {
             "Description: ".bold() + "<br/>" + d.DESCRIPTION + "<br/>" + "<br/>" +
             "Lead: ".bold() + d.LEAD + "<br/>" + "<br/>" +
 	    "Participants: ".bold() + "<br/>" + d.PARTICIPANTS.split(";").join("<br/>") + "<br/>" + "<br/>" +
-  	    '<a href=' + d.LINK + ' target= + d.LINK_TYPE + >' + "Documentation"  +"</a>" 
+  	    '<a href=' + d.LINK + ' target=' + d.LINK_TYPE + '>' + "Documentation"  +"</a>"
             )
           .style("left", (d3.event.pageX) + "px")
           .style("top", (d3.event.pageY - 28) + "px");
