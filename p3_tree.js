@@ -194,7 +194,13 @@ function update(source) {
   var nodeEnter = node.enter().append("g")
     .attr("class", "node")
     .attr("transform", function(d) {return "translate(" + source.y0 + "," + source.x0 + ")"; })
-    .on("click", click)
+    .on("click", function(d) {
+       click(d);
+       div.transition()
+           .duration(1)
+	   .style("opacity",0)
+	   .style('pointer-events', 'none'); 
+      })
       // add tool tip 
       .on("mouseover", function(d) {
 	div.transition()
@@ -214,7 +220,7 @@ function update(source) {
         })
       .on("mouseout", function(d) {
         div.transition()
-          .duration(750)
+          .duration(700)
           .style("opacity", 0)
 	  .delay(1500)
 	  .style('pointer-events', 'none');
