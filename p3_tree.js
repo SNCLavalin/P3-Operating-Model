@@ -197,7 +197,15 @@ function update(source) {
   //Enter any new nodes at the parent's previous position.
   var nodeEnter = node.enter().append("g")
     .attr("class", "node")
-    .attr("transform", function(d) {return "translate(" + source.y0 + "," + source.x0 + ")"; })
+    .attr("transform", function(d) {return "translate(" + source.y0 + "," + source.x0 + ")"; });
+    
+　
+  //Appends circle to each node; radius 10, white fill
+  //Other attributes of nodes can be appended (color,level,etc)
+  nodeEnter.append("circle")
+    .attr("r", 1e-6)
+    .style("stroke", function(d) { return d.LINE; })
+    .style("fill", function(d) {return d._children ? "lightsteelblue" : "#fff"; })
     .on("click", function(d) {
        click(d);
        div.transition()
@@ -219,7 +227,7 @@ function update(source) {
 	    "Participants: ".bold() + "<br/>" + d.PARTICIPANTS.split(";").join("<br/>") + "<br/>" + "<br/>" +
   	    '<a href=' + d.LINK + ' target=' + d.LINK_TYPE + '>' + d.HYPERLINK  +"</a>"
             )
-          .style("left", (d3.event.pageX) + "px")
+          .style("left", (d3.event.pageX + 10) + "px")
           .style("top", (d3.event.pageY - 28) + "px");
         })
       .on("mouseout", function(d) {
@@ -229,13 +237,6 @@ function update(source) {
 	  .delay(1500)
 	  .style('pointer-events', 'none');
         });
-　
-  //Appends circle to each node; radius 10, white fill
-  //Other attributes of nodes can be appended (color,level,etc)
-  nodeEnter.append("circle")
-    .attr("r", 1e-6)
-    .style("stroke", function(d) { return d.LINE; })
-    .style("fill", function(d) {return d._children ? "lightsteelblue" : "#fff"; });
 　
 　
 	
