@@ -368,6 +368,7 @@ function click(d) {
         }
     }
     update(d);
+    centerNode(d);
 }
 　
 　
