@@ -71,15 +71,19 @@ d3.csv("treeData.csv", function(error, data) {
   //collapse all the nodes by default when page is opened
   function collapse(d) {
     		if (d.children) {
+			d.all_children = d.children;
       			d._children = d.children;
       			d._children.forEach(collapse);
       			d.children = null;
+			d.hidden = true;
     		}
   	}
-　
-　
+
+
+  root.all_children = root.children;
   root.children.forEach(collapse);
-  //collapse(root);
+  root.children.forEach(function(d) {d.hidden = false;});
+  root.hidden = false;
   
   update(root);
   centerNode(root);
@@ -175,13 +179,13 @@ var svgGroup = baseSvg.append("g")
 function update(source) {
 　
   //Runs the tree layout, returning the array of nodes associated with the specified root node
-  var nodes = tree.nodes(root).reverse(),
+  var nodes = tree.nodes(root).filter(function(d) { return !d.hidden; }).reverse(),
     //Given the specified array of nodes, such as those returned by nodes,
     //returns an array of objects representing the links from parent to child for each node.
     links = tree.links(nodes);
 　
   // //Spacing for each node. Normalize for fixed-depth.
-  nodes.forEach(function(d) { d.y = d.depth * 300; });
+  nodes.forEach(function(d) { d.y = d.depth * 275; });
 　
   //Declare node variable, so that each node has its own unique ID
   var node = svgGroup.selectAll("g.node")
@@ -335,35 +339,34 @@ function update(source) {
 　
 // Toggle children on click.
 function click(d) {
-  if (d.children) {
-    d._children = d.children;
-    d.children = null;
-  } else {
-    d.children = d._children;
-    d._children = null;
-    
-  }
-　
-//If the node has a parent, then collapse it's child nodes
-//except for this clicked node
-　
-if(d.parent){
-  d.parent.children.forEach(function(element) {
-    if(d !== element){
-      if (element.children) {
-    	element._children = element.children;
-    	element.children = null;
-      } 
-			
+    if (d.children) {
+        d._children = d.children;
+        d.children = null;
+        if (d._children) {
+            d._children.forEach(function(n) { n.hidden = true; });
+
+            if (d.parent) {
+                d.parent.children = d.parent.all_children;
+                d.parent.children.forEach(function(n) {
+                    n.hidden = false;
+                });
+            }
+        }
+    } else {
+        d.children = d._children;
+        d._children = null;
+        if (d.children) {
+            d.children.forEach(function(n) { n.hidden = false; });
+
+            if (d.parent) {
+                d.parent.children = [d,];
+                d.parent.children.filter(function(n) { return n !== d; }).forEach(function(n) {
+                    n.hidden = true;
+                });
+            }
+        }
     }
-   });
-   
-}
-　
-　
-　centerNode(d);
-　
-  update(d);
+    update(d);
 }
 　
 　
