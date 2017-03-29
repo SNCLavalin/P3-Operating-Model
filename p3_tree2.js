@@ -232,9 +232,9 @@ function update(source) {
         })
       .on("mouseout", function(d) {
         div.transition()
-          .duration(700)
+          .duration(1)
           .style("opacity", 0)
-	  .delay(1500)
+	  .delay(1)
 	  .style('pointer-events', 'none');
         });
 　
@@ -253,10 +253,33 @@ function update(source) {
     .style("fill-opacity", 1e-6);
 　
     //add the tooltip
-   var div = d3.select("body")
-       .append("div")
+   var div = d3.select("#chart").append("div")
        .attr("class", "tooltip") // apply the "tooltip" class
-       .style("opacity",0); // set to invisible
+       .style("opacity",0) // set to invisible
+       // add tool tip 
+	.on("mouseover", function(d) {
+	div.transition()
+	  .duration(duration)
+	  .style("opacity", .9)
+          .style('pointer-events', 'auto');
+        div .html(
+            //"Index: ".bold() + d.name + "<br/>" +  "<br/>" +
+            //"Name: ".bold() + d.LABEL + "<br/>" +  "<br/>" +
+            "Description: ".bold() + "<br/>" + d.DESCRIPTION + "<br/>" + "<br/>" +
+            "Lead: ".bold() + d.LEAD + "<br/>" + "<br/>" +
+	    "Participants: ".bold() + "<br/>" + d.PARTICIPANTS.split(";").join("<br/>") + "<br/>" + "<br/>" +
+	    '<a href=' + d.LINK + ' target=' + d.LINK_TYPE + '>' + d.HYPERLINK  +"</a>"                           
+	    )
+          .style("left", (d3.event.pageX) + "px")
+          .style("top", (d3.event.pageY - 28) + "px");
+        })
+      .on("mouseout", function(d) {
+        div.transition()
+          .duration(1)
+          .style("opacity", 0)
+          .delay(1)
+          .style('pointer-events', 'none');
+        });
     
 　
   // Transition nodes to their new position.
