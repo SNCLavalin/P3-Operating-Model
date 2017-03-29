@@ -232,9 +232,9 @@ function update(source) {
         })
       .on("mouseout", function(d) {
         div.transition()
-          .duration(1)
+          .duration(10)
           .style("opacity", 0)
-	  .delay(1)
+	  .delay(10)
 	  .style('pointer-events', 'none');
         });
 　
