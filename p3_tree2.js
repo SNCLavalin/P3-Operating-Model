@@ -270,7 +270,7 @@ function update(source) {
 	    "Participants: ".bold() + "<br/>" + d.PARTICIPANTS.split(";").join("<br/>") + "<br/>" + "<br/>" +
 	    '<a href=' + d.LINK + ' target=' + d.LINK_TYPE + '>' + d.HYPERLINK  +"</a>"                           
 	    )
-          .style("left", (d3.event.pageX) + "px")
+          .style("left", (d3.event.pageX + 18) + "px")
           .style("top", (d3.event.pageY - 28) + "px");
         })
       .on("mouseout", function(d) {
