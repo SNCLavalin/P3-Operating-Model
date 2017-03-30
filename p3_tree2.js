@@ -363,7 +363,6 @@ function update(source) {
 　
 // Toggle children on click.
 function click(d) {
-    centerNode(d);
     if (d.children) {
         d._children = d.children;
         d.children = null;
@@ -392,7 +391,7 @@ function click(d) {
         }
     }
     update(d);
-    //centerNode(d);
+    centerNode(d);
 }
 　
 　
