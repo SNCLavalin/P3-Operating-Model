@@ -376,6 +376,13 @@ function click(d) {
                 });
             }
         }
+	
+	update(d);
+	if (d != root ){ centerNode(d.parent); }
+    	
+	
+	
+	
     } else {
         d.children = d._children;
         d._children = null;
@@ -389,10 +396,13 @@ function click(d) {
                 });
             }
         }
+
+	update(d);
+    	centerNode(d);
+	
     }
-    update(d);
-    centerNode(d);
+    
+    
 }
-　
-　
-　
+
+
