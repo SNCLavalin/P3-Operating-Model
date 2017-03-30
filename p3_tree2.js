@@ -392,7 +392,7 @@ function click(d) {
         }
     }
     update(d);
-    centerNode(d);
+    //centerNode(d);
 }
 　
 　
