@@ -404,5 +404,3 @@ function click(d) {
     
     
 }
-
-
