@@ -4,20 +4,6 @@ P3 Operating Model - Dynamic Workflow
 P3 Operating Model - Dynamic Workflow
 
 
------------------------------------------------------
-GitHub Access
-
-username: SNCLavalin
-password: SNClavalin2017
-recovery e-mail: p3operatingmodel@gmail.com
-
-Gmail Access
-
-username: p3operatingmodel@gmail.com
-password: SNClavalin2017
-
-
------------------------------------------------------
 
 Data Repository : https://github.com/SNCLavalin/P3-Operating-Model
 
@@ -40,7 +26,7 @@ INSTRUCTIONS
 
 **To modify the html/javascript/CSS of the webpage**
 
-- Sign in to the SNC Lavalin Github profile (username and passowrd above)
+- Sign in to the SNC Lavalin Github profile
 - Go to the P3 Operating Model Gist page (https://gist.github.com/SNCLavalin/162e57c94a31658d4a8139d314f452ae)
 - Click on "Edit" in the top right section of the screen to modify code
 - Save changes
